@@ -7,6 +7,7 @@ const db = require('./sqlWrap');
 const insertDB = "insert into ActivityTable (activity, date, amount) values (?,?,?)";
 const getOneDB = "select * from ActivityTable where activity = ? and date = ? and amount = ?";
 const allDB = "select * from ActivityTable where activity = ?";
+const futureDB = "select * from ActivityTable where amount = ?";
 
 async function testDB () {
 
@@ -36,6 +37,8 @@ async function testDB () {
 async function appendDB(activity, date, amount) {
   const newDate = new Date(date).getTime();
   await db.run(insertDB,[activity,newDate,amount]);
+  let result = await db.all(futureDB,[-1]);
+  console.log(result);
 }
 
 module.exports.testDB = testDB;

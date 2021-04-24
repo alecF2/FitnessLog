@@ -29,7 +29,7 @@ app.post('*', function(request, response, next) {
   response.send("I got your POST request");
 
   if (request.url === '/store') {
-    dbo.appendDB(request.body.activity, request.activity.date, -1);
+    dbo.appendDB(request.body.activity, request.body.date, -1);
   }
 });
 
