@@ -1,7 +1,7 @@
 'use strict';  // always start with this 
 
-import data from './js/data.js'
-import barchart from './js/barchart.js'
+// import data from './js/data.js'
+// import barchart from './js/barchart.js'
 
 
 
@@ -326,8 +326,7 @@ function getReminder() {
     console.log(data);
     let reminder_message = document.getElementById("reminder_message");
     reminder_message.textContent = `Did you ${data.activity} yesterday?`;
-    reminder_activity = data.activity;
-    reminder_container.classList.remove('hide');
+    document.getElementsByClassName("reminder_container")[0].classList.remove('hide');
   })
   .catch(err => {
     console.log("No reminder to show", err);
@@ -354,5 +353,5 @@ no_btn.addEventListener('click', ()=> {
   reminder_container.classList.add('hide');
 });
 
-barchart.init('chart-anchor', 500, 300);
-barchart.render(data, "Miles ran");
+// barchart.init('chart-anchor', 500, 300);
+// barchart.render(data, "Miles ran");
