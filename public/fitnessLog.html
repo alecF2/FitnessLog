@@ -9,10 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="reset.css" rel="stylesheet" type="text/css" />
     <link href="fitnessLog.css" rel="stylesheet" type="text/css" />
-    <script defer src="fitnessLog.js"></script>
+    <link rel="stylesheet" href="css/barchart.css">
+    <script defer src="fitnessLog.js" type="module"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
   </head>
 
   <body onload=getReminder()>
+    <!-- Chart -->
+    <div id='chart-anchor' class="hide"></div>
     <!-- Fitness Log Banner -->
     <nav>
       <h3>Fitness Log</h3>
@@ -30,7 +34,7 @@
 
     <main>
       <!-- Reminder Section -->
-      <div class="reminder_container">
+      <div class="reminder_container hide">
         <h2> Reminder </h2>
         <p id="reminder_message">?</p>
         <button id="yes_btn"> Yes </button>

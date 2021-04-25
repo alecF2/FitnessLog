@@ -19,11 +19,11 @@ const barchart = {
                             ${this.height + this.margin.top + this.margin.bottom}`);
     },
 
-    render(dataset) {
+    render(dataset, units) {
         this.dataset = dataset;
         this.clear();
         this.adjustScales();
-        this.renderLabels();
+        this.renderLabels(units);
         this.renderBars();
         this.renderXAxis();
         this.renderYAxis();
@@ -47,7 +47,7 @@ const barchart = {
             .range([this.height, 0]);
     },
 
-    renderLabels() {
+    renderLabels(units) {
         // Factors 2.75 and -15 are chosen empirically
         // We can also calculate the length and height of the strings when rendered
         // but it's much more cumbersome
@@ -56,7 +56,7 @@ const barchart = {
                 .attr('transform', `translate(10 ${this.margin.top + (this.height)/2.75}) rotate(90)`)
                 .append('text')
                 .attr('class', 'barchart-x-axis-label')
-                .text('Kilometers Run')
+                .text(units)
 
         this.svg.append('g')
                 .attr('transform', `translate(${this.margin.left + (this.width)/2.75} ${this.margin.top + this.height + this.margin.bottom - 15})`)
