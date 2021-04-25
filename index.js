@@ -30,6 +30,17 @@ app.get("/reminder", (request, response) => {
   });
 });
 
+app.get("/week", (request, response)=>{
+  let date = request.query.date;
+  let activity = request.query.activity;
+  // Query the DB to get activity that matches the query string
+  
+
+  // TODO: if the activity is empty, find the most recent database entry and use that activity
+  //TODO: if the request is for a date that is at least a week ago, send back list of entries from the DB for the chosen activity for the week ending with that date
+  // TODO: else send a message refusing the query because the date is too late
+});
+
 // This is where the server recieves and responds to POST requests
 app.post('*', function(request, response, next) {
   console.log("Server recieved a post request at", request.url);
