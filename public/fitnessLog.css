@@ -76,7 +76,7 @@ header h1 {
 /* || Container Styling */
 
 .reminder_container {
-  background-color: #5361E0;
+  background-color: #5361e0;
   display: flex;
   padding: 10px 12px;
   flex-wrap: wrap;
@@ -84,7 +84,7 @@ header h1 {
   /* justify-content: space-between; */
 }
 
-.reminder_container>h2 {
+.reminder_container > h2 {
   font-weight: 800;
   font-style: italic;
   flex-basis: 100%;
@@ -96,7 +96,8 @@ header h1 {
   color: white;
 }
 
-#yes_btn, #no_btn {
+#yes_btn,
+#no_btn {
   padding: 0;
   display: inline;
   font-weight: 600;
@@ -138,7 +139,8 @@ header h1 {
 
 /* || Start Form Styles */
 
-#pAct-Add p, #fAct-Add p {
+#pAct-Add p,
+#fAct-Add p {
   margin-bottom: 0.5rem;
   text-align: center;
 }
@@ -148,6 +150,23 @@ header h1 {
   background-color: #fff;
   font-weight: bold;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* View Progress Button */
+
+.viewBtn {
+  color: white;
+  background-color: #333333;
+  font-weight: bold;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  margin-left: 5px;
+  margin-bottom: 0.6rem;
+}
+
+.past_header_container {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 5px; */
 }
 
 /* || Form Styles */
@@ -175,7 +194,9 @@ header h1 {
   flex-wrap: wrap;
 }
 
-label, .form-label, .form-button {
+label,
+.form-label,
+.form-button {
   display: flex;
   flex-direction: column;
   margin: 10px;
@@ -203,7 +224,7 @@ select {
   align-items: flex-end;
 }
 
-#activity-for-wrapper>.form-label {
+#activity-for-wrapper > .form-label {
   padding-bottom: 10px;
 }
 
@@ -213,11 +234,13 @@ select {
   max-width: 300px;
 }
 
-#label-scalar, #label-units {
+#label-scalar,
+#label-units {
   flex: 1;
 }
 
-#label-scalar>input, #label-units>input {
+#label-scalar > input,
+#label-units > input {
   width: 80%;
 }
 
@@ -242,7 +265,9 @@ input[type="date"]::-webkit-inner-spin-button {
     align-items: flex-end;
     justify-content: center;
   }
-  label, .form-label, .form-button {
+  label,
+  .form-label,
+  .form-button {
     margin: 10px 15px;
   }
   .form-button {
@@ -257,7 +282,8 @@ input[type="date"]::-webkit-inner-spin-button {
     right: 0;
     max-height: 350px;
   }
-  label, .form-label {
+  label,
+  .form-label {
     margin: 10px 20px;
   }
   .form-button {
