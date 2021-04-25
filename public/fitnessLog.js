@@ -5,6 +5,8 @@
 document.getElementById('pAct-date').valueAsDate = newUTCDate()
 document.getElementById('fAct-date').valueAsDate = newUTCDate()
 
+// Date form element
+let date_form = document.getElementById('pAct-date');
 
 /* Past Activity 'Add New Activity' Button - Show Form */
 let add_past_activity_button = document.getElementById("addPastActivityButton")
@@ -300,6 +302,10 @@ function newUTCDate() {
   return new Date(gmtDate.toLocaleDateString())
 }
 
+// Reminder container queries 
+let reminder_container = document.getElementsByClassName("reminder_container")[0];
+let reminder_activity = "";
+
 function getReminder() {
   fetch(`/reminder`, {
     method: 'GET',
@@ -314,10 +320,10 @@ function getReminder() {
     console.log(data);
     let reminder_message = document.getElementById("reminder_message");
     reminder_message.textContent = `Did you ${data.activity} yesterday?`;
+    reminder_activity = data.activity;
   })
   .catch(err => {
     console.log("this didn't work", err);
-    let reminder_container = document.getElementsByClassName("reminder_container")[0];
     reminder_container.classList.add('hide');
   });
 }
@@ -326,10 +332,18 @@ function getReminder() {
 let yes_btn = document.getElementById("yes_btn");
 let no_btn = document.getElementById("no_btn");
 
+// Opens up the add new activity box with the activity we reminded them about
 yes_btn.addEventListener('click', ()=> {
-  console.log('yes button clicked');
+  add_past_activity_button.click();
+  reminder_container.classList.add('hide');
+  past_activity_dropdown.value = reminder_activity;
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  date_form.valueAsDate = yesterday;
 });
 
+// Close the reminder box
 no_btn.addEventListener('click', ()=> {
-  console.log('no button clicked');
+  reminder_container.classList.add('hide');
 });

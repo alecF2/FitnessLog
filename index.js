@@ -48,7 +48,7 @@ app.get("/week", (request, response)=>{
 
   // Query the DB to get activity that matches the query string
 
-  // TODO: if the activity is empty, find the most recent database entry and use that activity
+  // If the activity is empty, find the most recent database entry and use that activity
   if (activity === undefined) {
     dbo.getLatestActivity().then(act => {
       activity = act;
@@ -60,9 +60,6 @@ app.get("/week", (request, response)=>{
     console.log(list);
   });
   
-
-  //TODO: if the request is for a date that is at least a week ago, send back list of entries from the DB for the chosen activity for the week ending with that date
-  // TODO: else send a message refusing the query because the date is too late
 });
 
 // This is where the server recieves and responds to POST requests
