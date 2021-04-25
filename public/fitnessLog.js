@@ -1,5 +1,11 @@
 'use strict';  // always start with this 
 
+import data from './js/data.js'
+import barchart from './js/barchart.js'
+
+
+
+
 
 /* Set default date in forms to current date */
 document.getElementById('pAct-date').valueAsDate = newUTCDate()
@@ -321,10 +327,10 @@ function getReminder() {
     let reminder_message = document.getElementById("reminder_message");
     reminder_message.textContent = `Did you ${data.activity} yesterday?`;
     reminder_activity = data.activity;
+    reminder_container.classList.remove('hide');
   })
   .catch(err => {
-    console.log("this didn't work", err);
-    reminder_container.classList.add('hide');
+    console.log("No reminder to show", err);
   });
 }
 
@@ -347,3 +353,6 @@ yes_btn.addEventListener('click', ()=> {
 no_btn.addEventListener('click', ()=> {
   reminder_container.classList.add('hide');
 });
+
+barchart.init('chart-anchor', 500, 300);
+barchart.render(data, "Miles ran");

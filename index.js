@@ -30,14 +30,14 @@ app.get("/reminder", (request, response) => {
   });
 });
 
-app.get("/week", (request, response)=>{
+app.get("/week", (request, response) => {
   let week_before_today = new Date();
   week_before_today.setDate(week_before_today.getDate() - 7);
   week_before_today = week_before_today.getTime();
   let date = Number(request.query.date);
   let activity = request.query.activity;
-  console.log(date);
-  console.log(week_before_today);
+  // console.log(date);
+  // console.log(week_before_today);
 
   // date is too new, reject the request
   if (date > week_before_today) {
@@ -52,7 +52,7 @@ app.get("/week", (request, response)=>{
   if (activity === undefined) {
     dbo.getLatestActivity().then(act => {
       activity = act;
-    })
+    });
   }
 
   // get activities within a week timespan
@@ -62,9 +62,9 @@ app.get("/week", (request, response)=>{
   
 });
 
-// This is where the server recieves and responds to POST requests
+// This is where the server receives and responds to POST requests
 app.post('*', function(request, response, next) {
-  console.log("Server recieved a post request at", request.url);
+  console.log("Server received a post request at", request.url);
   console.log("body",request.body);
   response.send("I got your POST request");
 
@@ -88,5 +88,3 @@ dbo.testDB().catch(
     console.log("error:", error);
   }
 );
-
-
