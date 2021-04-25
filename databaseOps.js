@@ -22,6 +22,7 @@ async function testDB () {
   await db.run(insertDB,["running",today,2.4]);
   await db.run(insertDB,["walking",today,1.1]);
   await db.run(insertDB,["walking",today,2.7]);
+  await db.run(insertDB,["Basketball",new Date("April 26, 2021 21:00:00"),6.9]);
   await db.run(insertDB,["Bike",new Date("April 22, 2021 21:00:00"),-1]);
   await db.run(insertDB,["Soccer",new Date("April 23, 2021 23:22:11"),-1]);
   await db.run(insertDB,["Walk",new Date("April 25, 2021 23:23:11"),-1]);
@@ -29,12 +30,12 @@ async function testDB () {
   console.log("inserted two items");
 
   // look at the item we just inserted
-  let result = await db.get(getOneDB,["running",today,2.4]);
-  console.log(result);
+  // let result = await db.get(getOneDB,["running",today,2.4]);
+  // console.log(result);
 
   // get multiple items as a list
-  result = await db.all(allDB,["walking"]);
-  console.log(result);
+  // result = await db.all(allDB,["walking"]);
+  // console.log(result);
 }
 
 // append to the database
@@ -60,6 +61,26 @@ async function getRecentFuture() {
   return result;
 }
 
+async function getLatestActivity() {
+  let query = "select activity from ActivityTable where rowIdNum = (select max(rowIdNum) from ActivityTable)";
+  let result = await db.get(query);
+  console.log(result);
+  return result;
+}
+
+async function getWeekActivities(activity, start_date) {
+  let newDate = new Date(start_date);
+  console.log(newDate.toString());
+  let end_date = new Date(start_date);
+  end_date.setDate(end_date.getDate() + 7);
+  console.log(end_date.toString());
+  let query = "select * from ActivityTable where activity = ? and date between ? and ?"
+  let result = await db.all(query, [activity, start_date, end_date]);
+  return result;
+}
+
 module.exports.testDB = testDB;
 module.exports.appendDB = appendDB;
 module.exports.getRecentFuture = getRecentFuture;
+module.exports.getLatestActivity = getLatestActivity;
+module.exports.getWeekActivities = getWeekActivities;

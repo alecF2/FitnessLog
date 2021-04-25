@@ -31,12 +31,36 @@ app.get("/reminder", (request, response) => {
 });
 
 app.get("/week", (request, response)=>{
-  let date = request.query.date;
+  let week_before_today = new Date();
+  week_before_today.setDate(week_before_today.getDate() - 7);
+  week_before_today = week_before_today.getTime();
+  let date = Number(request.query.date);
   let activity = request.query.activity;
+  console.log(date);
+  console.log(week_before_today);
+
+  // date is too new, reject the request
+  if (date > week_before_today) {
+    console.log("done");
+    response.send({message:"the date is too late."});
+    return;
+  }
+
   // Query the DB to get activity that matches the query string
-  
 
   // TODO: if the activity is empty, find the most recent database entry and use that activity
+  if (activity === undefined) {
+    dbo.getLatestActivity().then(act => {
+      activity = act;
+    })
+  }
+
+  // get activities within a week timespan
+  dbo.getWeekActivities(activity, date).then(list => {
+    console.log(list);
+  });
+  
+
   //TODO: if the request is for a date that is at least a week ago, send back list of entries from the DB for the chosen activity for the week ending with that date
   // TODO: else send a message refusing the query because the date is too late
 });
