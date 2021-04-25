@@ -313,7 +313,7 @@ function getReminder() {
   .then(data => {
     console.log(data);
     let reminder_message = document.getElementById("reminder_message");
-      reminder_message.textContent = `Did you ${data.activity} yesterday?`;
+    reminder_message.textContent = `Did you ${data.activity} yesterday?`;
   })
   .catch(err => {
     console.log("this didn't work", err);
