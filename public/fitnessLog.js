@@ -299,3 +299,37 @@ function newUTCDate() {
   let gmtDate = new Date()
   return new Date(gmtDate.toLocaleDateString())
 }
+
+function getReminder() {
+  fetch(`/reminder`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+    let reminder_message = document.getElementById("reminder_message");
+      reminder_message.textContent = `Did you ${data.activity} yesterday?`;
+  })
+  .catch(err => {
+    console.log("this didn't work", err);
+    let reminder_container = document.getElementsByClassName("reminder_container")[0];
+    reminder_container.classList.add('hide');
+  });
+}
+
+// Reminder bar
+let yes_btn = document.getElementById("yes_btn");
+let no_btn = document.getElementById("no_btn");
+
+yes_btn.addEventListener('click', ()=> {
+  console.log('yes button clicked');
+});
+
+no_btn.addEventListener('click', ()=> {
+  console.log('no button clicked');
+});

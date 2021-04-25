@@ -11,6 +11,8 @@ const dbo = require('./databaseOps');
 // object that provides interface for express
 const app = express();
 
+const db = require('./sqlWrap');
+
 // use this instead of the older body-parser
 app.use(express.json());
 
@@ -20,6 +22,12 @@ app.use(express.static('public'))
 // when there is nothing following the slash in the url, return the main page of the app.
 app.get("/", (request, response) => {
   response.sendFile(__dirname + "/public/fitnessLog.html");
+});
+
+app.get("/reminder", (request, response) => {
+  dbo.getRecentFuture().then((result) => {
+    response.send(result);
+  });
 });
 
 // This is where the server recieves and responds to POST requests

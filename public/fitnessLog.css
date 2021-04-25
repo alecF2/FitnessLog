@@ -75,7 +75,41 @@ header h1 {
 
 /* || Container Styling */
 
-.main-container+.main-container {
+.reminder_container {
+  background-color: #5361E0;
+  display: flex;
+  padding: 10px 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.reminder_container>h2 {
+  font-weight: 800;
+  font-style: italic;
+  flex-basis: 100%;
+  margin-bottom: 5px;
+}
+
+#reminder_message {
+  font-weight: 600;
+  color: white;
+}
+
+#yes_btn, #no_btn {
+  padding: 0;
+  display: inline;
+  font-weight: 600;
+  background-color: transparent;
+  color: white;
+  text-decoration: underline;
+}
+
+#yes_btn {
+  margin: 0 40px;
+}
+
+.main-container {
   padding-top: 40px;
 }
 

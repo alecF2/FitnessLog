@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>Fitness Log</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="reset.css" rel="stylesheet" type="text/css" />
     <link href="fitnessLog.css" rel="stylesheet" type="text/css" />
     <script defer src="fitnessLog.js"></script>
   </head>
 
-  <body>
+  <body onload=getReminder()>
     <!-- Fitness Log Banner -->
     <nav>
       <h3>Fitness Log</h3>
@@ -26,8 +27,16 @@
         <p class="subtitle">What activity session are you logging?</p>
       </div>
     </header>
-    
+
     <main>
+      <!-- Reminder Section -->
+      <div class="reminder_container">
+        <h2> Reminder </h2>
+        <p id="reminder_message">?</p>
+        <button id="yes_btn"> Yes </button>
+        <button id="no_btn"> No </button> 
+      </div>
+
       <!-- Past Activities Section -->
       <div id="past-activity" class="main-container">
         <h3 class="container-title">Past Activity</h3>

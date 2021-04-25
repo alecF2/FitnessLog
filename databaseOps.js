@@ -22,7 +22,10 @@ async function testDB () {
   await db.run(insertDB,["running",today,2.4]);
   await db.run(insertDB,["walking",today,1.1]);
   await db.run(insertDB,["walking",today,2.7]);
-  
+  await db.run(insertDB,["Bike",new Date("April 22, 2021 21:00:00"),-1]);
+  await db.run(insertDB,["Soccer",new Date("April 23, 2021 23:22:11"),-1]);
+  await db.run(insertDB,["Walk",new Date("April 25, 2021 23:23:11"),-1]);
+  await db.run(insertDB,["Yoga",new Date("April 23, 2021 23:23:11"),-1]);
   console.log("inserted two items");
 
   // look at the item we just inserted
@@ -34,6 +37,7 @@ async function testDB () {
   console.log(result);
 }
 
+// append to the database
 async function appendDB(activity, date, amount) {
   const newDate = new Date(date).getTime();
   await db.run(insertDB,[activity,newDate,amount]);
@@ -41,5 +45,21 @@ async function appendDB(activity, date, amount) {
   console.log(result);
 }
 
+// Get the most recent planned activity 
+async function getRecentFuture() {
+
+  let today = new Date().getTime();
+  let midnight = new Date().setHours(0,0,0,0);
+  // Find the planned activity with the smallest time difference
+  // Credit: https://stackoverflow.com/questions/14075722/find-closest-date
+  let query = "SELECT * FROM ActivityTable where amount = ? and date < ? ORDER BY ABS(date - ?) ASC"
+  let result = await db.get(query,[-1, midnight, today]);
+  let delete_query = "DELETE FROM ActivityTable where amount = ? and date < ?";
+  await db.run(delete_query, [-1, today]);
+  // console.log(result);
+  return result;
+}
+
 module.exports.testDB = testDB;
 module.exports.appendDB = appendDB;
+module.exports.getRecentFuture = getRecentFuture;
