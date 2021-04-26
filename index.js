@@ -36,9 +36,8 @@ app.get("/week", (request, response) => {
   week_before_today = week_before_today.getTime();
   let date = Number(request.query.date);
   let activity = request.query.activity;
-  // console.log(date);
-  // console.log(week_before_today);
-
+  console.log('query string date value: ', date);
+  console.log('query string activity value: ', activity);
   // date is too new, reject the request
   if (date > week_before_today) {
     console.log("done");
@@ -49,7 +48,8 @@ app.get("/week", (request, response) => {
   // Query the DB to get activity that matches the query string
 
   // If the activity is empty, find the most recent database entry and use that activity
-  if (activity === undefined) {
+  if (activity === '' || activity === undefined) {
+    console.log('activity undefined!')
     dbo.getLatestActivity().then(act => {
       activity = act;
     });

@@ -1,6 +1,5 @@
 'use strict';  // always start with this 
 
-import data from './js/data.js'
 import barchart from './js/barchart.js'
 
 
@@ -343,6 +342,9 @@ window.addEventListener('load', () => {
 let yes_btn = document.getElementById("yes_btn");
 let no_btn = document.getElementById("no_btn");
 
+// View Progress Button
+let view_progress_btn = document.getElementById("view_prog");
+
 // Format date 
 function format_date(date) {
   if (date < 10) {
@@ -371,6 +373,31 @@ yes_btn.addEventListener('click', ()=> {
 // Close the reminder box
 no_btn.addEventListener('click', ()=> {
   reminder_container.classList.add('hide');
+});
+
+// Open Chart Modal 
+view_progress_btn.addEventListener('click', () => {
+  
+  // Default Setting - Get ending date from one week ago 
+  let today = new Date();
+  let week_ago = new Date(today);
+  week_ago.setDate(today.getDate() - 7);
+  week_ago = week_ago.getTime();
+  console.log(`todays date: ${today.getTime()} and date from a week ago: ${week_ago}`);
+  
+  // Make GET request and use date from one week ago and an empty activity
+  fetch(`/week?date=${week_ago}&activity=`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(
+    // TODO: Populate chart with data from the DB
+    console.log('GET request successfully sent to /week'))
+  .catch((err) => console.log(err))
+
+  // For testing purposes
+  document.getElementById('chart-anchor').classList.remove('hide');
 });
 
 barchart.init('chart-anchor', 500, 300);

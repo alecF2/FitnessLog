@@ -23,6 +23,14 @@ async function testDB () {
   await db.run(insertDB,["walking",today,1.1]);
   await db.run(insertDB,["walking",today,2.7]);
   await db.run(insertDB,["Basketball",new Date("April 26, 2021 21:00:00"),6.9]);
+  // Testing out getWeekActivities function
+  await db.run(insertDB,["Basketball",new Date("April 11, 2021 21:00:00"),6.9]);
+  await db.run(insertDB,["Yoga",new Date("April 12, 2021 21:00:00"),3]);
+  await db.run(insertDB,["Walking",new Date("April 13, 2021 21:00:00"),4]);
+  await db.run(insertDB,["Soccer",new Date("April 14, 2021 21:00:00"),5]);
+  await db.run(insertDB,["Bike",new Date("April 15, 2021 21:00:00"),6]);
+  await db.run(insertDB,["Swim",new Date("April 18, 2021 21:00:00"),7]);
+  // -----------------------------------------
   await db.run(insertDB,["Bike",new Date("April 22, 2021 21:00:00"),-1]);
   await db.run(insertDB,["Soccer",new Date("April 23, 2021 23:22:11"),-1]);
   await db.run(insertDB,["Walk",new Date("April 25, 2021 23:23:11"),-1]);
@@ -68,14 +76,13 @@ async function getLatestActivity() {
   return result;
 }
 
-async function getWeekActivities(activity, start_date) {
-  let newDate = new Date(start_date);
-  console.log(newDate.toString());
-  let end_date = new Date(start_date);
-  end_date.setDate(end_date.getDate() + 7);
-  console.log(end_date.toString());
+async function getWeekActivities(activity, end_date) {
+  let endDate = new Date(end_date);
+  let start_date = new Date(end_date);
+  start_date.setDate(endDate.getDate() - 7);
+  console.log(`DB Op; Start date: ${start_date.getTime()} End Date: ${endDate.getTime()}`)
   let query = "select * from ActivityTable where activity = ? and date between ? and ?"
-  let result = await db.all(query, [activity, start_date, end_date]);
+  let result = await db.all(query, [activity, start_date.getTime(), endDate.getTime()]);
   return result;
 }
 
