@@ -326,6 +326,7 @@ function getReminder() {
     console.log(data);
     let reminder_message = document.getElementById("reminder_message");
     reminder_message.textContent = `Did you ${data.activity} yesterday?`;
+    reminder_activity = data.activity;
     document.getElementsByClassName("reminder_container")[0].classList.remove('hide');
   })
   .catch(err => {
@@ -346,6 +347,7 @@ yes_btn.addEventListener('click', ()=> {
   const yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - 1);
   date_form.valueAsDate = yesterday;
+  past_activity_dropdown_onchange();
 });
 
 // Close the reminder box
