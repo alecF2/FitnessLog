@@ -32,7 +32,10 @@ async function testDB () {
   await db.run(insertDB,["Swim",new Date("April 18, 2021 21:00:00"),7]);
   await db.run(insertDB,["Swim",new Date("April 17, 2021 21:00:00"),1.1]);
   await db.run(insertDB,["Swim",new Date("April 16, 2021 21:00:00"),2.3]);
-  await db.run(insertDB,["Swim",new Date("April 15, 2021 21:00:00"),4]);
+  await db.run(insertDB,["Swim",new Date("April 14, 2021 21:00:00"),4]);
+  await db.run(insertDB,["Swim",new Date("April 13, 2021 21:00:00"),2]);
+  await db.run(insertDB,["Swim",new Date("April 12, 2021 21:00:00"),11]);
+  await db.run(insertDB,["Swim",new Date("April 11, 2021 21:00:00"),5]);
   // -----------------------------------------
   await db.run(insertDB,["Bike",new Date("April 22, 2021 21:00:00"),-1]);
   await db.run(insertDB,["Soccer",new Date("April 23, 2021 23:22:11"),-1]);
