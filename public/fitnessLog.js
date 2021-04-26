@@ -1,7 +1,7 @@
 'use strict';  // always start with this 
 
-// import data from './js/data.js'
-// import barchart from './js/barchart.js'
+import data from './js/data.js'
+import barchart from './js/barchart.js'
 
 
 
@@ -334,9 +334,23 @@ function getReminder() {
   });
 }
 
+// Onload Event Listener to call getReminder
+window.addEventListener('load', () => {
+  getReminder();
+});
+
 // Reminder bar
 let yes_btn = document.getElementById("yes_btn");
 let no_btn = document.getElementById("no_btn");
+
+// Format date 
+function format_date(date) {
+  if (date < 10) {
+    let result = `0${date}`;
+    return result;
+  }
+  return date;
+}
 
 // Opens up the add new activity box with the activity we reminded them about
 yes_btn.addEventListener('click', ()=> {
@@ -344,9 +358,13 @@ yes_btn.addEventListener('click', ()=> {
   reminder_container.classList.add('hide');
   past_activity_dropdown.value = reminder_activity;
   const today = new Date();
-  const yesterday = new Date(today);
+  let yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - 1);
-  date_form.valueAsDate = yesterday;
+  console.log('yesterday', yesterday);
+  let year = yesterday.getFullYear();
+  let month = format_date(yesterday.getMonth() + 1);
+  let day = format_date(yesterday.getDate());
+  document.getElementById('pAct-date').value = `${year}-${month}-${day}`;
   past_activity_dropdown_onchange();
 });
 
@@ -355,5 +373,5 @@ no_btn.addEventListener('click', ()=> {
   reminder_container.classList.add('hide');
 });
 
-// barchart.init('chart-anchor', 500, 300);
-// barchart.render(data, "Miles ran");
+barchart.init('chart-anchor', 500, 300);
+barchart.render(data, "Miles ran");
