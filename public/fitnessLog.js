@@ -382,23 +382,69 @@ view_progress_btn.addEventListener('click', () => {
   let today = new Date();
   let week_ago = new Date(today);
   week_ago.setDate(today.getDate() - 7);
-  week_ago = week_ago.getTime();
   console.log(`todays date: ${today.getTime()} and date from a week ago: ${week_ago}`);
   
   // Make GET request and use date from one week ago and an empty activity
-  fetch(`/week?date=${week_ago}&activity=`, {
+  fetch(`/week?date=${week_ago.getTime()}&activity=`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
-  }).then(
-    // TODO: Populate chart with data from the DB
-    console.log('GET request successfully sent to /week'))
-  .catch((err) => console.log(err))
+  }).then(response => {
+    return response.json();
+  }).then(list => {
+    console.log(list);
+    let act_arr = [];
+    list.forEach(obj => {
+      console.log(obj);
+      console.log({'date': obj.date, 'value': obj.amount});
+      act_arr.push({'date': obj.date, 'value': obj.amount});
+    });
+    console.log("act_arr after pushing:",act_arr);
+    
+    let act = '';
+    switch(list[0].activity) {
+      case "Walk":
+        act = "Kilometers walked";
+        break;
+      case "Run":
+        act = "Kilometers ran";
+        break;
+      case "Bike":
+        act = "Kilometers biked";
+        break;
+      case "Swim":
+        act = "Laps swam";
+        break;
+      case "Yoga":
+        act = "Minutes of Yoga";
+        break;
+      case "Basketball":
+        act = "Minutes of Basketball";
+        break;
+    }
 
-  // For testing purposes
-  document.getElementById('chart-anchor').classList.remove('hide');
+    console.log("activity name:", act);
+    
+    // Update Chart Date 
+    let chart_date = document.getElementById('chart-date');
+    let chart_year = week_ago.getFullYear();
+    let chart_month = format_date(week_ago.getMonth() + 1);
+    let chart_day = format_date(week_ago.getDate());
+    chart_date.value = `${chart_year}-${chart_month}-${chart_day}`;
+    console.log(chart_date);
+
+    document.getElementsByClassName('modal_background')[0].classList.remove('hide');
+    console.log("after hiding");
+    barchart.init('chart-anchor', 500, 300);
+    console.log(`act_arr: ${act_arr} act: ${act}`);
+    barchart.render(act_arr, act);
+  });
 });
 
-barchart.init('chart-anchor', 500, 300);
-barchart.render(data, "Miles ran");
+// Exit Modal Button 
+let exit_btn = document.getElementById('exit_btn');
+exit_btn.addEventListener('click', ()=> {
+  document.getElementsByClassName('modal_background')[0].classList.add('hide');
+  document.getElementsByClassName('barchart')[0].remove();
+});

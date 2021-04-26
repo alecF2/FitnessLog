@@ -10,13 +10,40 @@
     <link href="reset.css" rel="stylesheet" type="text/css" />
     <link href="fitnessLog.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/barchart.css">
+    <script src="https://kit.fontawesome.com/03213a8b01.js" crossorigin="anonymous"></script>
     <script defer src="fitnessLog.js" type="module"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
   </head>
 
   <body>
     <!-- Chart -->
-    <div id='chart-anchor' class="hide"></div>
+    <div class="modal_background hide">
+      <div id="chart_box">
+        <div id="icon_wrap">
+          <i class="fas fa-times" id="exit_btn"></i>
+        </div>
+        <div id="chart_header">
+          <div id="chart-activity-wrap">
+            <h2>View activity for:</h2>
+            <select name="chart-activities" id="chart-activity" >
+              <option value="Walk">Walk</option>
+              <option value="Run">Run</option>
+              <option value="Swim">Swim</option>
+              <option value="Bike">Bike</option>
+              <option value="Yoga">Yoga</option>
+              <option value="Soccer">Soccer</option>
+              <option value="Basketball">Basketball</option>
+            </select>
+          </div>
+          <div id="chart-date-wrap">
+            <h2>For week ending:</h2>
+            <input type="date" id="chart-date" />
+          </div>
+          <button class="goBtn">Go</button>
+        </div>
+        <div id="chart-anchor"></div>
+      </div>
+    </div>
     <!-- Fitness Log Banner -->
     <nav>
       <h3>Fitness Log</h3>

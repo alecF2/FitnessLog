@@ -57,6 +57,7 @@ app.get("/week", (request, response) => {
       dbo.getWeekActivities(act, date).then(list => {
         console.log('list of activities within the week')
         console.log(list);
+        response.send(list);
       });
     });
   } else {
@@ -64,6 +65,7 @@ app.get("/week", (request, response) => {
     dbo.getWeekActivities(activity, date).then(list => {
       console.log('list of activities within the week')
       console.log(list);
+      response.send(list);
     });
   }
 });
