@@ -51,15 +51,21 @@ app.get("/week", (request, response) => {
   if (activity === '' || activity === undefined) {
     console.log('activity undefined!')
     dbo.getLatestActivity().then(act => {
-      activity = act;
+      activity = act.activity;
+      return activity;
+    }).then(act => {
+      dbo.getWeekActivities(act, date).then(list => {
+        console.log('list of activities within the week')
+        console.log(list);
+      });
+    });
+  } else {
+    // get activities within a week timespan
+    dbo.getWeekActivities(activity, date).then(list => {
+      console.log('list of activities within the week')
+      console.log(list);
     });
   }
-
-  // get activities within a week timespan
-  dbo.getWeekActivities(activity, date).then(list => {
-    console.log(list);
-  });
-  
 });
 
 // This is where the server receives and responds to POST requests

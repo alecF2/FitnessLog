@@ -26,7 +26,7 @@ async function testDB () {
   // Testing out getWeekActivities function
   await db.run(insertDB,["Basketball",new Date("April 11, 2021 21:00:00"),6.9]);
   await db.run(insertDB,["Yoga",new Date("April 12, 2021 21:00:00"),3]);
-  await db.run(insertDB,["Walking",new Date("April 13, 2021 21:00:00"),4]);
+  await db.run(insertDB,["Walk",new Date("April 13, 2021 21:00:00"),4]);
   await db.run(insertDB,["Soccer",new Date("April 14, 2021 21:00:00"),5]);
   await db.run(insertDB,["Bike",new Date("April 15, 2021 21:00:00"),6]);
   await db.run(insertDB,["Swim",new Date("April 18, 2021 21:00:00"),7]);
@@ -72,11 +72,13 @@ async function getRecentFuture() {
 async function getLatestActivity() {
   let query = "select activity from ActivityTable where rowIdNum = (select max(rowIdNum) from ActivityTable)";
   let result = await db.get(query);
+  console.log('latest activity is:');
   console.log(result);
   return result;
 }
 
 async function getWeekActivities(activity, end_date) {
+  console.log('activity within getWeek function is: ' + activity);
   let endDate = new Date(end_date);
   let start_date = new Date(end_date);
   start_date.setDate(endDate.getDate() - 7);
