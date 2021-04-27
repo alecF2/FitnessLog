@@ -84,6 +84,15 @@ footer {
   width: 80%;
   max-width: 1000px;
   padding: 15px 15px 40px;
+  /* margin: auto; */
+}
+
+#chart-anchor {
+  text-align: center;
+}
+
+.barchart {
+  max-width: 600px;
 }
 
 #chart_header {
@@ -92,7 +101,8 @@ footer {
   align-items: center;
   justify-content: space-around;
   padding: 0px 15px;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
+  margin: auto auto 15px;
 }
 
 #chart_header > div {
@@ -167,7 +177,7 @@ header h1 {
 .reminder_container {
   background-color: #5361e0;
   display: flex;
-  padding: 10px 12px;
+  padding: 15px 12px 10px;
   flex-wrap: wrap;
   align-items: center;
   /* justify-content: space-between; */
@@ -183,6 +193,13 @@ header h1 {
 #reminder_message {
   font-weight: 600;
   color: white;
+  flex-basis: 275px;
+  margin-bottom: 5px;
+}
+
+#btn_wrap {
+  /* margin-top: 8px; */
+  margin-bottom: 5px;
 }
 
 #yes_btn,
@@ -193,10 +210,12 @@ header h1 {
   background-color: transparent;
   color: white;
   text-decoration: underline;
+  /* margin-top: 8px; */
+  margin-right: 4px;
 }
 
 #yes_btn {
-  margin: 0 40px;
+  margin-right: 40px;
 }
 
 .main-container {
@@ -251,7 +270,8 @@ header h1 {
   margin-left: 10px;
   margin-bottom: 0.6rem;
 }
-.goBtn {
+
+#goBtn {
   color: white;
   background-color: #333333;
   font-weight: bold;
@@ -372,6 +392,23 @@ input[type="date"]::-webkit-inner-spin-button {
     align-self: flex-end;
     margin: 10px 30px;
   }
+  #chart_header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 575px;
+    justify-content: center;
+  }
+  #chart-activity-wrap, #chart-date-wrap {
+    width: 30%;
+    flex-basis: 50%;
+  }
+  .reminder_container {
+    flex-wrap: nowrap;
+  }
+  .reminder_container h2 {
+    flex-basis: auto;
+    margin-right: 50px;
+  }
 }
 
 @media only screen and (min-width: 960px) {
@@ -386,5 +423,17 @@ input[type="date"]::-webkit-inner-spin-button {
   }
   .form-button {
     margin: 10px 30px;
+  }
+  #chart_header {
+    width: 750px;
+  }
+  #chart-activity-wrap, #chart-date-wrap {
+    flex-basis: 40%;
+    /* margin-left: 0;
+    margin-right: 0; */
+  }
+  #goBtn {
+    align-self: flex-start;
+    margin-left: 15px;
   }
 }

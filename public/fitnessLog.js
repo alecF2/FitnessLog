@@ -448,3 +448,62 @@ exit_btn.addEventListener('click', ()=> {
   document.getElementsByClassName('modal_background')[0].classList.add('hide');
   document.getElementsByClassName('barchart')[0].remove();
 });
+
+// Go Button 
+let go_btn = document.getElementById('goBtn');
+go_btn.addEventListener('click', () => {
+  
+  let modal_activity = document.getElementById('chart-activity').value;
+  let modal_week_ending = document.getElementById('chart-date').value;
+  modal_week_ending = new Date(modal_week_ending).getTime();
+
+   // Make GET request and use date from one week ago and an empty activity
+  fetch(`/week?date=${modal_week_ending}&activity=${modal_activity}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(response => {
+    return response.json();
+  }).then(list => {
+    console.log(list);
+    let act_arr = [];
+    list.forEach(obj => {
+      console.log(obj);
+      console.log({'date': obj.date, 'value': obj.amount});
+      act_arr.push({'date': obj.date, 'value': obj.amount});
+    });
+    console.log("act_arr after pushing:",act_arr);
+    
+    let act = '';
+    switch(list[0].activity) {
+      case "Walk":
+        act = "Kilometers walked";
+        break;
+      case "Run":
+        act = "Kilometers ran";
+        break;
+      case "Bike":
+        act = "Kilometers biked";
+        break;
+      case "Swim":
+        act = "Laps swam";
+        break;
+      case "Yoga":
+        act = "Minutes of Yoga";
+        break;
+      case "Basketball":
+        act = "Minutes of Basketball";
+        break;
+    }
+
+    console.log("activity name:", act);
+
+    document.getElementsByClassName('modal_background')[0].classList.remove('hide');
+    console.log("after hiding");
+    barchart.clear();
+    // barchart.init('chart-anchor', 500, 300);
+    console.log(`act_arr: ${act_arr} act: ${act}`);
+    barchart.render(act_arr, act);
+  });
+});

@@ -39,7 +39,7 @@
             <h2>For week ending:</h2>
             <input type="date" id="chart-date" />
           </div>
-          <button class="goBtn">Go</button>
+          <button id="goBtn">Go</button>
         </div>
         <div id="chart-anchor"></div>
       </div>
@@ -64,8 +64,10 @@
       <div class="reminder_container hide">
         <h2> Reminder </h2>
         <p id="reminder_message">?</p>
-        <button id="yes_btn"> Yes </button>
-        <button id="no_btn"> No </button> 
+        <div id="btn_wrap">
+          <button id="yes_btn"> <p>Yes</p> </button>
+          <button id="no_btn"> <p>No</p> </button> 
+        </div>
       </div>
 
       <!-- Past Activities Section -->
